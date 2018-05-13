@@ -1,5 +1,6 @@
 package com.example.android.java;
 
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,11 +22,16 @@ public class MainActivity extends AppCompatActivity {
     public void onButtonClick(View v) {
         ObjectAnimator animatorX = ObjectAnimator.ofFloat(imageView, "scaleX", 1f, 2f)
                 .setDuration(1000);
-        animatorX.start();
 
         ObjectAnimator animatorY = ObjectAnimator.ofFloat(imageView, "scaleY", 1f, 2f)
                 .setDuration(1000);
-        animatorY.start();
+
+        AnimatorSet set = new AnimatorSet();
+//        set.playTogether(animatorX, animatorY);
+        set.playSequentially(animatorX, animatorY);
+        set.setDuration(3000);
+        set.start();
+
     }
 
 }
